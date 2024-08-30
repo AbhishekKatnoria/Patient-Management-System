@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import CustomForm from "../CustomForm";
@@ -35,14 +35,32 @@ const PatientForm = () => {
   }
 
   return (
-    <Form {...form}>
+    <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex-1">
         <section className="mb-12 space-y-4">
           <h1 className="text-4xl">Hi there, ....</h1>
           <p className="text-dark-700">Get Started with Appointments.</p>
         </section>
         <CustomForm
-        formType = {FormFieldType.INPUT}
+          formType={FormFieldType.INPUT}
+          control={form.control}
+          name="usename"
+          lable="Full Name"
+          placeholder="abhishek"
+          iconSrc="/assets/icons/user.svg"
+          iconAlt="user"
+        />
+        <CustomForm
+          formType={FormFieldType.INPUT}
+          control={form.control}
+          name="Email"
+          lable="Email"
+          placeholder="abhishek@gmail.com"
+          iconSrc="/assets/icons/email.svg"
+          iconAlt="Email"
+        />
+        <CustomForm 
+          formType={FormFieldType.PHONE_INPUT}
           control={form.control}
           name="usename"
           lable="Full Name"
@@ -52,7 +70,7 @@ const PatientForm = () => {
         />
         <Button type="submit">Submit</Button>
       </form>
-    </Form>
+    </FormProvider>
   );
 };
 
