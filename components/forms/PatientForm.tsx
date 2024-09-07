@@ -20,6 +20,9 @@ const formSchema = z.object({
   username: z.string().min(2, {
     message: "Username must be at least 2 characters.",
   }),
+  email: z.string().email({
+    message: "Invalid email address.",
+  }),
 });
 
 const PatientForm = () => {
@@ -27,6 +30,7 @@ const PatientForm = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       username: "",
+      email: "",
     },
   });
 
@@ -44,7 +48,7 @@ const PatientForm = () => {
         <CustomForm
           formType={FormFieldType.INPUT}
           control={form.control}
-          name="usename"
+          name="username"
           lable="Full Name"
           placeholder="abhishek"
           iconSrc="/assets/icons/user.svg"
@@ -53,21 +57,21 @@ const PatientForm = () => {
         <CustomForm
           formType={FormFieldType.INPUT}
           control={form.control}
-          name="Email"
+          name="email"
           lable="Email"
           placeholder="abhishek@gmail.com"
           iconSrc="/assets/icons/email.svg"
           iconAlt="Email"
         />
-        <CustomForm 
-          formType={FormFieldType.PHONE_INPUT}
-          control={form.control}
-          name="usename"
-          lable="Full Name"
-          placeholder="abhishek"
-          iconSrc="/assets/icons/user.svg"
-          iconAlt="user"
-        />
+        {/* <CustomForm
+            formType={FormFieldType.PHONE_INPUT}
+            control={form.control}
+            name="usename"
+            lable="Full Name"
+            placeholder="abhishek"
+            iconSrc="/assets/icons/user.svg"
+            iconAlt="user"
+          /> */}
         <Button type="submit">Submit</Button>
       </form>
     </FormProvider>
