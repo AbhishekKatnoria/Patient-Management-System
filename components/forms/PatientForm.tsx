@@ -3,8 +3,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
 import CustomForm from "../CustomForm";
+import SubmitButtom from "../ui/SubmitButton";
+import { UserFormValidation } from "@/lib/validation";
+import { useState } from "react";
 
 export enum FormFieldType {
   INPUT = "input",
@@ -16,26 +18,26 @@ export enum FormFieldType {
   SKELETON = "skeleton",
 }
 
-const formSchema = z.object({
-  username: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-  email: z.string().email({
-    message: "Invalid email address.",
-  }),
-});
-
 const PatientForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const [isLoading, setIsLoading] = useState(false);
+  const form = useForm<z.infer<typeof UserFormValidation>>({
+    resolver: zodResolver(UserFormValidation),
     defaultValues: {
       username: "",
       email: "",
+      phone: "",
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof UserFormValidation>) {
+    const { username, email, phone } = values;
+    setIsLoading(true);
+
+    try {
+      const userData = { username, email, phone };
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -63,16 +65,16 @@ const PatientForm = () => {
           iconSrc="/assets/icons/email.svg"
           iconAlt="Email"
         />
-        {/* <CustomForm
-            formType={FormFieldType.PHONE_INPUT}
-            control={form.control}
-            name="usename"
-            lable="Full Name"
-            placeholder="abhishek"
-            iconSrc="/assets/icons/user.svg"
-            iconAlt="user"
-          /> */}
-        <Button type="submit">Submit</Button>
+        <CustomForm
+          formType={FormFieldType.PHONE_INPUT}
+          control={form.control}
+          name="phone"
+          lable="Phone Name"
+          placeholder="abhishek"
+          iconSrc="/assets/icons/user.svg"
+          iconAlt="user"
+        />
+        <SubmitButton isLoading={isLoading}>Get Started</SubmitButton>
       </form>
     </FormProvider>
   );

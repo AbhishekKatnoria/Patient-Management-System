@@ -29,6 +29,7 @@ interface CustomProps {
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
 }
+type E164Number = string;
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const { iconAlt, iconSrc, formType, placeholder } = props;
@@ -62,7 +63,11 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           <PhoneInput
             placeholder={placeholder}
             defaultCountry="US"
-            // onChange={}
+            international
+            withCountryCallingCode
+            value={field.value as E164Number | undefined}
+            onChange={field.onChange}
+            className="input-phone"
           />
         </FormControl>
       );
