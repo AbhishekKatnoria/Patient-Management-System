@@ -7,6 +7,7 @@ import CustomForm from "../CustomForm";
 import SubmitButtom from "../ui/SubmitButton";
 import { UserFormValidation } from "@/lib/validation";
 import { useState } from "react";
+import SubmitButton from "../ui/SubmitButton";
 
 export enum FormFieldType {
   INPUT = "input",
