@@ -8,14 +8,16 @@ const {
   DOCTOR_COLLECTION_ID,
   APPOINTMENT_COLLECTION_ID,
   NEXT_PUBLIC_BUCKET_ID: BUCKET_ID,
-  NEXT_PUBLIC_ENGPOINT: ENDPOINT,
+  NEXT_PUBLIC_ENDPOINT_ID: ENDPOINT,
 } = process.env;
 
 const client = new sdk.Client();
 
-client.setEndpoint(ENDPOINT!).setKey(API_KEY!).setProject(PROJECT_ID!);
+console.log(ENDPOINT)
+
+client.setEndpoint(ENDPOINT!).setProject(PROJECT_ID!).setKey(API_KEY!);
 
 export const database = new sdk.Databases(client);
 export const store = new sdk.Storage(client);
 export const messaging = new sdk.Messaging(client);
-export const user = new sdk.Users(client);
+export const users = new sdk.Users(client);
