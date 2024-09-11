@@ -13,8 +13,6 @@ const {
 
 const client = new sdk.Client();
 
-console.log(ENDPOINT)
-
 client.setEndpoint(ENDPOINT!).setProject(PROJECT_ID!).setKey(API_KEY!);
 
 export const database = new sdk.Databases(client);
