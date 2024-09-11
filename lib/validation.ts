@@ -7,7 +7,8 @@ export const UserFormValidation = z.object({
   email: z.string().email({
     message: "Invalid email address.",
   }),
-  phone: z
-    .string()
-    .refine((phone) => /^\+\d{10,15}$/.test(phone), "Invalid phone number"),
-});
+  phone: z.string().refine((phone) => /^\+\d{10,15}$/.test(phone), {
+    message:
+      "Phone number must start with a '+' and be between 10 to 15 digits long.",
+  }),
+}); 

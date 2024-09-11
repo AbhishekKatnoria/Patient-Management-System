@@ -4,7 +4,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import CustomForm from "../CustomForm";
-import SubmitButtom from "../ui/SubmitButton";
 import { UserFormValidation } from "@/lib/validation";
 import { useState } from "react";
 import SubmitButton from "../ui/SubmitButton";
@@ -33,13 +32,17 @@ const PatientForm = () => {
     },
   });
 
-  async function onSubmit(values: z.infer<typeof UserFormValidation>) {
-    const { name, email, phone } = values;
+  async function onSubmit({
+    name,
+    email,
+    phone,
+  }: z.infer<typeof UserFormValidation>) {
     setIsLoading(true);
 
     try {
       const userData = { name, email, phone };
       const user = await createUser(userData);
+
       if (user) {
         router.push(`/patients/${user.$id}/register`);
       }
@@ -61,7 +64,7 @@ const PatientForm = () => {
           formType={FormFieldType.INPUT}
           control={form.control}
           name="name"
-          lable="Full Name"
+          label="Full Name"
           placeholder="abhishek"
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
@@ -70,7 +73,7 @@ const PatientForm = () => {
           formType={FormFieldType.INPUT}
           control={form.control}
           name="email"
-          lable="Email"
+          label="Email"
           placeholder="abhishek@gmail.com"
           iconSrc="/assets/icons/email.svg"
           iconAlt="Email"
@@ -79,8 +82,8 @@ const PatientForm = () => {
           formType={FormFieldType.PHONE_INPUT}
           control={form.control}
           name="phone"
-          lable="Phone Name"
-          placeholder="abhishek"
+          label="Phone Name"
+          placeholder="(555) 123-4567"
           iconSrc="/assets/icons/user.svg"
           iconAlt="user"
         />

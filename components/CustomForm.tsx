@@ -14,12 +14,13 @@ import { FormFieldType } from "./forms/PatientForm";
 import Image from "next/image";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import {E164Number} from "libphonenumber-js";
 
 interface CustomProps {
   control: Control<any>;
   formType: FormFieldType;
   name: string;
-  lable?: string;
+  label?: string;
   placeholder?: string;
   iconSrc?: string;
   iconAlt?: string;
@@ -29,7 +30,6 @@ interface CustomProps {
   children?: React.ReactNode;
   renderSkeleton?: (field: any) => React.ReactNode;
 }
-type E164Number = string;
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   const { iconAlt, iconSrc, formType, placeholder } = props;
@@ -66,7 +66,7 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
             international
             withCountryCallingCode
             value={field.value as E164Number | undefined}
-            onChange={field.onChange}
+            onChange={(value) => field.onChange(value)}
             className="input-phone"
           />
         </FormControl>
@@ -75,15 +75,15 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
   }
 };
 const CustomForm = (props: CustomProps) => {
-  const { control, name, formType, lable } = props;
+  const { control, name, formType, label } = props;
   return (
     <FormField
       control={control}
       name={name}
       render={({ field }) => (
         <FormItem>
-          {formType !== FormFieldType.CHECKBOX && lable && (
-            <FormLabel>{lable}</FormLabel>
+          {formType !== FormFieldType.CHECKBOX && label && (
+            <FormLabel>{label}</FormLabel>
           )}
 
           <RenderField field={field} props={props} />
