@@ -6,11 +6,10 @@ import { z } from "zod";
 import CustomForm from "../CustomForm";
 import { UserFormValidation } from "@/lib/validation";
 import { useState } from "react";
-import SubmitButton from "../ui/SubmitButton";
 import { createUser } from "@/lib/actions/patients.action";
 import { useRouter } from "next/navigation";
 import { FormControl } from "../ui/form";
-import { RadioGroup, RadioGroupItem } from "@radix-ui/react-radio-group";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { GenderOption } from "@/constants";
 import { Label } from "@radix-ui/react-label";
 
@@ -115,25 +114,30 @@ export const RegisterForm = ({ user }: { user: User }) => {
             label="Birth Day"
             iconSrc="/assets/icons/calendar.svg"
           />
-          <CustomForm
-            formType={FormFieldType.SKELETON}
-            control={form.control}
-            name="gender"
-            label="Gender"
-            renderSkeleton={(field) => (
-              <FormControl>
-                <RadioGroup>
-                  {GenderOption.map((option) => (
-                    <div key={option} className="radio-group">
-                      <RadioGroupItem value={option} id={option}>
-                        <Label htmlFor={option}>{option}</Label>
-                      </RadioGroupItem>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </FormControl>
-            )}
-          />
+              <CustomForm
+              formType  ={FormFieldType.SKELETON}
+              control={form.control}
+              name="gender"
+              label="Gender"
+              renderSkeleton={(field) => (
+                <FormControl>
+                  <RadioGroup
+                    className="flex h-11 gap-6 xl:justify-between"
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    {GenderOption.map((option, i) => (
+                      <div key={option + i} className="radio-group">
+                        <RadioGroupItem value={option} id={option} />
+                        <Label htmlFor={option} className="cursor-pointer">
+                          {option}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </FormControl>
+              )}
+            />
         </div>
 
         <div className="flex flex-col gap-6 xl:flex-row">
