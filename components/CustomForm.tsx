@@ -18,6 +18,7 @@ import { E164Number } from "libphonenumber-js";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { RadioGroup } from "@radix-ui/react-radio-group";
 
 interface CustomProps {
   control: Control<any>;
@@ -35,7 +36,7 @@ interface CustomProps {
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
-  const { iconAlt, iconSrc, formType, placeholder } = props;
+  const { iconAlt, iconSrc, formType, placeholder,renderSkeleton } = props;
   const [startDate, setStartDate] = useState(new Date());
 
   switch (formType) {
@@ -97,6 +98,9 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
           </FormControl>
         </div>
       );
+
+    case FormFieldType.SKELETON:
+      return props.renderSkeleton ? props.renderSkeleton(field) : null;
 
     default:
       break;
