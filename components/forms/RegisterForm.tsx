@@ -22,7 +22,7 @@ export enum FormFieldType {
   SKELETON = "skeleton",
 }
 
-export const RegisterForm = ({ user }: { user: User }) => {
+export const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const form = useForm<z.infer<typeof UserFormValidation>>({
