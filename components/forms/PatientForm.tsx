@@ -37,7 +37,7 @@ const PatientForm = () => {
     phone,
   }: z.infer<typeof UserFormValidation>) {
     setIsLoading(true);
-
+    router.push("/patients/register");
   }
 
   return (

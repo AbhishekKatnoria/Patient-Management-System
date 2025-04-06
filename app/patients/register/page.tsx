@@ -17,7 +17,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
             loading="lazy"
           />
 
-          {/* <RegisterForm user={user}/> */}
+          <RegisterForm />
         </div>
       </section>
       <Image
