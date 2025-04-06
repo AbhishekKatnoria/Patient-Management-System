@@ -1,11 +1,10 @@
-import { Models } from "node-appwrite";
-
-export interface Patient extends Models.Document {
+export interface Patient {
+  id: string; 
   userId: string;
   name: string;
   email: string;
   phone: string;
-  birthDate: Date;
+  birthDate: string | Date;
   gender: Gender;
   address: string;
   occupation: string;
@@ -14,19 +13,20 @@ export interface Patient extends Models.Document {
   primaryPhysician: string;
   insuranceProvider: string;
   insurancePolicyNumber: string;
-  allergies: string | undefined;
-  currentMedication: string | undefined;
-  familyMedicalHistory: string | undefined;
-  pastMedicalHistory: string | undefined;
-  identificationType: string | undefined;
-  identificationNumber: string | undefined;
-  identificationDocument: FormData | undefined;
+  allergies?: string;
+  currentMedication?: string;
+  familyMedicalHistory?: string;
+  pastMedicalHistory?: string;
+  identificationType?: string;
+  identificationNumber?: string;
+  identificationDocument?: File;
   privacyConsent: boolean;
 }
 
-export interface Appointment extends Models.Document {
+export interface Appointment {
+  id: string;
   patient: Patient;
-  schedule: Date;
+  schedule: string | Date;
   status: Status;
   primaryPhysician: string;
   reason: string;

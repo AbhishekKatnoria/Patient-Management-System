@@ -6,7 +6,6 @@ import { z } from "zod";
 import CustomForm from "../CustomForm";
 import { UserFormValidation } from "@/lib/validation";
 import { useState } from "react";
-import { createUser } from "@/lib/actions/patients.action";
 import { useRouter } from "next/navigation";
 import { FormControl } from "../ui/form";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
@@ -41,19 +40,6 @@ export const RegisterForm = ({ user }: { user: User }) => {
     phone,
   }: z.infer<typeof UserFormValidation>) {
     setIsLoading(true);
-
-    try {
-      const userData = { name, email, phone };
-      const user = await createUser(userData);
-
-      if (user) {
-        router.push(`/patients/${user.$id}/register`);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
   }
 
   return (
@@ -114,30 +100,30 @@ export const RegisterForm = ({ user }: { user: User }) => {
             label="Birth Day"
             iconSrc="/assets/icons/calendar.svg"
           />
-              <CustomForm
-              formType  ={FormFieldType.SKELETON}
-              control={form.control}
-              name="gender"
-              label="Gender"
-              renderSkeleton={(field) => (
-                <FormControl>
-                  <RadioGroup
-                    className="flex h-11 gap-6 xl:justify-between"
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
-                    {GenderOption.map((option, i) => (
-                      <div key={option + i} className="radio-group">
-                        <RadioGroupItem value={option} id={option} />
-                        <Label htmlFor={option} className="cursor-pointer">
-                          {option}
-                        </Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                </FormControl>
-              )}
-            />
+          <CustomForm
+            formType={FormFieldType.SKELETON}
+            control={form.control}
+            name="gender"
+            label="Gender"
+            renderSkeleton={(field) => (
+              <FormControl>
+                <RadioGroup
+                  className="flex h-11 gap-6 xl:justify-between"
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  {GenderOption.map((option, i) => (
+                    <div key={option + i} className="radio-group">
+                      <RadioGroupItem value={option} id={option} />
+                      <Label htmlFor={option} className="cursor-pointer">
+                        {option}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </FormControl>
+            )}
+          />
         </div>
 
         <div className="flex flex-col gap-6 xl:flex-row">
