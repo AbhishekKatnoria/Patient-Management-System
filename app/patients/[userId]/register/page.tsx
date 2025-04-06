@@ -1,10 +1,8 @@
 import { RegisterForm } from "@/components/forms/RegisterForm";
-import { getUser } from "@/lib/actions/patients.action";
 import Image from "next/image";
 import React from "react";
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
-  const user = await getUser(userId);
 
   return (
     <div className="flex h-screen max-h-screen gap-5">
@@ -19,7 +17,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
             loading="lazy"
           />
 
-          <RegisterForm user={user}/>
+          {/* <RegisterForm user={user}/> */}
         </div>
       </section>
       <Image
