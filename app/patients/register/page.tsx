@@ -3,11 +3,10 @@ import Image from "next/image";
 import React from "react";
 
 const Register = async ({ params: { userId } }: SearchParamProps) => {
-
   return (
     <div className="flex h-screen max-h-screen gap-5">
       <section className="remove-scrollbar container my-auto">
-        <div className="sub-container max-w-[496px]">
+        <div className="sub-container w-full max-w-[860px]">
           <Image
             width={100}
             height={100}
@@ -20,7 +19,7 @@ const Register = async ({ params: { userId } }: SearchParamProps) => {
           <RegisterForm />
         </div>
       </section>
-      <Image
+      <Image  
         width={1000}
         height={1000}
         alt="Home Image"
