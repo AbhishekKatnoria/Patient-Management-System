@@ -36,7 +36,7 @@ interface CustomProps {
 }
 
 const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
-  const { iconAlt, iconSrc, formType, placeholder,renderSkeleton } = props;
+  const { iconAlt, iconSrc, formType, placeholder, renderSkeleton } = props;
   const [startDate, setStartDate] = useState(new Date());
 
   switch (formType) {
@@ -109,20 +109,22 @@ const RenderField = ({ field, props }: { field: any; props: CustomProps }) => {
 const CustomForm = (props: CustomProps) => {
   const { control, name, formType, label } = props;
   return (
-    <FormField
-      control={control}
-      name={name}
-      render={({ field }) => (
-        <FormItem>
-          {formType !== FormFieldType.CHECKBOX && label && (
-            <FormLabel>{label}</FormLabel>
-          )}
+    <div className="w-full">
+      <FormField
+        control={control}
+        name={name}
+        render={({ field }) => (
+          <FormItem>
+            {formType !== FormFieldType.CHECKBOX && label && (
+              <FormLabel>{label}</FormLabel>
+            )}
 
-          <RenderField field={field} props={props} />
-          <FormMessage className="shad-error" />
-        </FormItem>
-      )}
-    />
+            <RenderField field={field} props={props} />
+            <FormMessage className="shad-error" />
+          </FormItem>
+        )}
+      />
+    </div>
   );
 };
 

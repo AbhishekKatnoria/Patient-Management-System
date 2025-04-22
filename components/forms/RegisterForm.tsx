@@ -8,7 +8,7 @@ import { UserFormValidation } from "@/lib/validation";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FormControl } from "../ui/form";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { GenderOption } from "@/constants";
 import { Label } from "@radix-ui/react-label";
 
@@ -71,7 +71,7 @@ export const RegisterForm = () => {
           iconAlt="user"
         />
 
-        <div className="flex flex-col gap-6 xl:flex-row">
+        <div className="flex justify-between w-full gap-6 xl:flex-row">
           <CustomForm
             formType={FormFieldType.INPUT}
             control={form.control}
@@ -112,7 +112,7 @@ export const RegisterForm = () => {
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  {GenderOption.map((option, i) => (
+                  {GenderOption?.map((option, i) => (
                     <div key={option + i} className="radio-group">
                       <RadioGroupItem value={option} id={option} />
                       <Label htmlFor={option} className="cursor-pointer">
@@ -130,18 +130,35 @@ export const RegisterForm = () => {
           <CustomForm
             formType={FormFieldType.INPUT}
             control={form.control}
-            name="email"
-            label="Email"
-            placeholder="abhishek@gmail.com"
-            iconSrc="/assets/icons/email.svg"
-            iconAlt="Email"
+            name="address"
+            label="Address"
+            placeholder="ex: 14 street,Delhi"
+            iconAlt="Address"
+          />
+          <CustomForm
+            formType={FormFieldType.INPUT}
+            control={form.control}
+            name="occupation"
+            label="Occupation"
+            placeholder="Frontend Developer"
+            iconAlt="Occupation"
+          />
+        </div>
+        <div className="flex flex-col gap-6 xl:flex-row">
+          <CustomForm
+            formType={FormFieldType.INPUT}
+            control={form.control}
+            name="emergencyContactName"
+            label="Emergency contact name"
+            placeholder="Parent’s name"
+            iconAlt="Address"
           />
           <CustomForm
             formType={FormFieldType.PHONE_INPUT}
             control={form.control}
-            name="phone"
+            name="emergencyContactPhone"
             label="Phone Name"
-            placeholder="(555) 123-4567"
+            placeholder="+91  576 487 98098"
             iconSrc="/assets/icons/user.svg"
             iconAlt="user"
           />
